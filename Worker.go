@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var WRONG_SYNTHAX_ERROR = "Malformed notation ( Only Integers and the 4 basics operators can be used"
+var WRONG_SYNTHAX_ERROR = "Malformed notation ( Only Integers and the 4 basics operators can be used )"
 var VALID_MESSAGE = " is equals to "
 var ARGUMENT_NULL_ERROR = "An equation cannot be empty"
 
