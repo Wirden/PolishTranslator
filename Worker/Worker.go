@@ -15,11 +15,13 @@ var ARGUMENT_NULL_ERROR = "An equation cannot be empty"
 
 func main() {
 
-	arg := os.Args[1]
+	l := log.New(os.Stderr, "", 0)
 
-	if arg == "" {
-		log.Fatal(ARGUMENT_NULL_ERROR)
+	if len(os.Args) != 2 {
+		l.Fatal(ARGUMENT_NULL_ERROR)
 	}
+
+	arg := os.Args[1]
 
 	var stack []float64
 	for _, tok := range strings.Fields(arg) {
@@ -57,7 +59,7 @@ func main() {
 				f, _ := strconv.ParseFloat(tok, 64)
 				stack = append(stack, f)
 			} else {
-				log.Fatal(err)
+				l.Fatal(err)
 			}
 		}
 	}
@@ -66,6 +68,7 @@ func main() {
 }
 
 func error1() {
+	l := log.New(os.Stderr, "", 0)
 	err := errors.New(WRONG_SYNTHAX_ERROR)
-	log.Fatal(err)
+	l.Fatal(err)
 }
