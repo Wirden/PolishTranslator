@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 ILLEGAL_ARG_NUM_ERROR = 'Illegal number of arguments. Please enter the file to process as the first argument and the name of the log file as the second argument'
-IO_ERROR = 'Please enter a valid file name'
+IO_ERROR = 'Impossible to open the file '
 EXPR_NUM_ERROR = 'The number of expressions does not match the number provided'
 VALUE_NUM_ERROR = 'The first line of the file must be an integer'
 WORKER_PATH = "../Worker/Worker"
@@ -22,7 +22,8 @@ def Spliter(expr):
 			content = [x.strip() for x in content]
 			return content
 	except IOError:
-		print IO_ERROR
+		print IO_ERROR, f
+		return
 	finally:
 		f.close()
 
@@ -47,11 +48,17 @@ def main(argv):
 		print EXPR_NUM_ERROR
 		return
 
+	try:
+		f1=open(log_file, 'a+')
+	except IOError:
+		print IO_ERROR, log_file
+		return
+
+
 	for expr in list_expression[1:]:
 		for path in execute([WORKER_PATH, expr]):
-			f1=open(log_file, 'a+')
 			f1.write(path)
-			f1.close()
+	f1.close()
 
 
 

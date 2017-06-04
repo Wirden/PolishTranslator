@@ -5,48 +5,51 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
-var WRONG_SYNTHAX_ERROR = "Malformed notation ( Only Integers and the 4 basics operators can be used )"
-var VALID_MESSAGE = " is equals to "
-var ARGUMENT_NULL_ERROR = "An equation cannot be empty"
+var WRONG_SYNTHAX_ERROR = " Malformed expression"
+var VALID_MESSAGE = " is equals to"
+var ARGUMENT_NULL_ERROR = " An equation cannot be empty"
+var EMPTY_LINE = " This line is empty"
 
 func main() {
+	start := time.Now()
+	arg := os.Args[1]
 
-	if len(os.Args) != 2 {
-		fmt.Println(ARGUMENT_NULL_ERROR)
+	if arg == "" {
+		elapsed := time.Since(start)
+		fmt.Println(arg, EMPTY_LINE, ", ", elapsed)
 		os.Exit(0)
 	}
-
-	arg := os.Args[1]
 
 	var stack []float64
 	for _, tok := range strings.Fields(arg) {
 		switch tok {
 		case "+":
 			if len(stack) < 2 {
-				error1()
+				error1(arg, start)
 			} else {
 				stack[len(stack)-2] += stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "-":
 			if len(stack) < 2 {
-				error1()
+				error1(arg, start)
 			} else {
 				stack[len(stack)-2] -= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "*":
 			if len(stack) < 2 {
-				error1()
+				error1(arg, start)
 			} else {
 				stack[len(stack)-2] *= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "/":
 			if len(stack) < 2 {
-				error1()
+				error1(arg, start)
 			} else {
 				stack[len(stack)-2] /= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
@@ -56,16 +59,25 @@ func main() {
 				f, _ := strconv.ParseFloat(tok, 64)
 				stack = append(stack, f)
 			} else {
-				fmt.Println(err)
+				elapsed := time.Since(start)
+				fmt.Println(arg, err, ", ", elapsed)
 				os.Exit(0)
 			}
 		}
 	}
 
-	fmt.Println(arg, VALID_MESSAGE, stack[0])
+	if len(stack) > 1 {
+		elapsed := time.Since(start)
+		fmt.Println(arg, WRONG_SYNTHAX_ERROR, ", ", elapsed)
+		os.Exit(0)
+	}
+
+	elapsed := time.Since(start)
+	fmt.Println(arg, VALID_MESSAGE, stack[0], ", ", elapsed)
 }
 
-func error1() {
-	fmt.Println(WRONG_SYNTHAX_ERROR)
+func error1(arg string, start time.Time) {
+	elapsed := time.Since(start)
+	fmt.Println(arg, WRONG_SYNTHAX_ERROR, ", ", elapsed)
 	os.Exit(0)
 }
