@@ -10,4 +10,6 @@ def execute(cmd):
 
 
 for path in execute(["../Worker/Worker", "5 8 + *"]):
-	print(path)
+	f1=open('../Result/testfile.txt', 'a+')
+	f1.write(path)
+	f1.close()

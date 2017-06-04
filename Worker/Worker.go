@@ -1,9 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -15,10 +13,9 @@ var ARGUMENT_NULL_ERROR = "An equation cannot be empty"
 
 func main() {
 
-	l := log.New(os.Stderr, "", 0)
-
 	if len(os.Args) != 2 {
-		l.Fatal(ARGUMENT_NULL_ERROR)
+		fmt.Println(ARGUMENT_NULL_ERROR)
+		os.Exit(0)
 	}
 
 	arg := os.Args[1]
@@ -59,7 +56,8 @@ func main() {
 				f, _ := strconv.ParseFloat(tok, 64)
 				stack = append(stack, f)
 			} else {
-				l.Fatal(err)
+				fmt.Println(err)
+				os.Exit(0)
 			}
 		}
 	}
@@ -68,7 +66,6 @@ func main() {
 }
 
 func error1() {
-	l := log.New(os.Stderr, "", 0)
-	err := errors.New(WRONG_SYNTHAX_ERROR)
-	l.Fatal(err)
+	fmt.Println(WRONG_SYNTHAX_ERROR)
+	os.Exit(0)
 }
