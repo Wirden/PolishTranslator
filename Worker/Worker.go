@@ -5,21 +5,19 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 var WRONG_SYNTHAX_ERROR = " Malformed expression"
-var VALID_MESSAGE = " is equals to"
+var VALID_MESSAGE = " is equals to "
 var ARGUMENT_NULL_ERROR = " An equation cannot be empty"
 var EMPTY_LINE = " This line is empty"
 
 func main() {
-	start := time.Now()
+
 	arg := os.Args[1]
 
 	if arg == "" {
-		elapsed := time.Since(start)
-		fmt.Println(arg, EMPTY_LINE, ", ", elapsed)
+		fmt.Print(arg, EMPTY_LINE)
 		os.Exit(0)
 	}
 
@@ -28,28 +26,28 @@ func main() {
 		switch tok {
 		case "+":
 			if len(stack) < 2 {
-				error1(arg, start)
+				error1(arg)
 			} else {
 				stack[len(stack)-2] += stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "-":
 			if len(stack) < 2 {
-				error1(arg, start)
+				error1(arg)
 			} else {
 				stack[len(stack)-2] -= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "*":
 			if len(stack) < 2 {
-				error1(arg, start)
+				error1(arg)
 			} else {
 				stack[len(stack)-2] *= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
 			}
 		case "/":
 			if len(stack) < 2 {
-				error1(arg, start)
+				error1(arg)
 			} else {
 				stack[len(stack)-2] /= stack[len(stack)-1]
 				stack = stack[:len(stack)-1]
@@ -59,25 +57,21 @@ func main() {
 				f, _ := strconv.ParseFloat(tok, 64)
 				stack = append(stack, f)
 			} else {
-				elapsed := time.Since(start)
-				fmt.Println(arg, err, ", ", elapsed)
+				fmt.Print(arg, err)
 				os.Exit(0)
 			}
 		}
 	}
 
 	if len(stack) > 1 {
-		elapsed := time.Since(start)
-		fmt.Println(arg, WRONG_SYNTHAX_ERROR, ", ", elapsed)
+		fmt.Print(arg, WRONG_SYNTHAX_ERROR)
 		os.Exit(0)
 	}
 
-	elapsed := time.Since(start)
-	fmt.Println(arg, VALID_MESSAGE, stack[0], ", ", elapsed)
+	fmt.Print(arg, VALID_MESSAGE, stack[0])
 }
 
-func error1(arg string, start time.Time) {
-	elapsed := time.Since(start)
-	fmt.Println(arg, WRONG_SYNTHAX_ERROR, ", ", elapsed)
+func error1(arg string) {
+	fmt.Print(arg, WRONG_SYNTHAX_ERROR)
 	os.Exit(0)
 }

@@ -1,11 +1,14 @@
 import subprocess
 import sys
+import time
 
 ILLEGAL_ARG_NUM_ERROR = 'Illegal number of arguments. Please enter the file to process as the first argument and the name of the log file as the second argument'
 IO_ERROR = 'Impossible to open the file '
 EXPR_NUM_ERROR = 'The number of expressions does not match the number provided'
 VALUE_NUM_ERROR = 'The first line of the file must be an integer'
 WORKER_PATH = "../Worker/Worker"
+
+start_time = time.time()
 
 def execute(cmd):
 	popen = subprocess.Popen(cmd,stdout=subprocess.PIPE)
@@ -16,17 +19,17 @@ def execute(cmd):
 
 
 def Spliter(expr):
-	try:
-		with open(expr) as f:
-			content = f.readlines()
-			content = [x.strip() for x in content]
-			return content
-	except IOError:
-		print IO_ERROR, f
-		return
-	finally:
-		f.close()
 
+	try:
+		f = open(expr)
+	except IOError:
+		print IO_ERROR, expr
+		return (False,"")
+
+	content = f.readlines()
+	content = [x.strip() for x in content]
+	f.close
+	return (True,content)
 
 def main(argv):
 	if len(argv) != 2:
@@ -36,7 +39,10 @@ def main(argv):
 	file_to_process = argv[0]
 	log_file = argv[1]
 
-	list_expression = Spliter(file_to_process)
+	spliter_bool,list_expression = Spliter(file_to_process)
+
+	if not spliter_bool:
+		return
 
 	try:
 		num_expr = int(list_expression[0])
@@ -57,7 +63,8 @@ def main(argv):
 
 	for expr in list_expression[1:]:
 		for path in execute([WORKER_PATH, expr]):
-			f1.write(path)
+			log_text = path + ", " + str(time.time() - start_time)
+			f1.write(log_text + '\n')
 	f1.close()
 
 

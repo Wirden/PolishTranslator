@@ -1,0 +1,7 @@
+ This line is empty, 0.00110197067261
+5 2 Malformed expression, 0.00202488899231
+5 is equals to 5, 0.00310492515564
+5 + Malformed expression, 0.00426888465881
+5 5 + + Malformed expression, 0.00523209571838
+5 5 + is equals to 10, 0.0062689781189
+5 1 2 + 4 * + 3 - is equals to 14, 0.00708198547363
