@@ -6,6 +6,7 @@ ILLEGAL_ARG_NUM_ERROR = 'Illegal number of arguments. Please enter the file to p
 IO_ERROR = 'Impossible to open the file '
 EXPR_NUM_ERROR = 'The number of expressions does not match the number provided'
 VALUE_NUM_ERROR = 'The first line of the file must be an integer'
+FINAL_TEXT = " It took the program {0} to calculate the entries. "
 WORKER_PATH = "../Worker/Worker"
 
 start_time = time.time()
@@ -62,9 +63,14 @@ def main(argv):
 
 
 	for expr in list_expression[1:]:
+		loop_time = time.time()
 		for path in execute([WORKER_PATH, expr]):
-			log_text = path + ", " + str(time.time() - start_time)
+			log_text = path + ", " + str(time.time() - loop_time)
 			f1.write(log_text + '\n')
+
+	final_text = FINAL_TEXT.format(time.time() - start_time)
+	f1.write('\n')
+	f1.write(final_text + '\n')
 	f1.close()
 
 
