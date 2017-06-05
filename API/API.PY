@@ -6,7 +6,7 @@ ILLEGAL_ARG_NUM_ERROR = 'Illegal number of arguments. Please enter the file to p
 IO_ERROR = 'Impossible to open the file '
 EXPR_NUM_ERROR = 'The number of expressions does not match the number provided'
 VALUE_NUM_ERROR = 'The first line of the file must be an integer'
-FINAL_TEXT = " It took the program {0} to calculate the entries. "
+FINAL_TEXT = " It took the program {0} seconds to calculate the entries. "
 WORKER_PATH = "../Worker/Worker"
 
 start_time = time.time()
