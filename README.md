@@ -12,12 +12,12 @@ is equivalent to this in RPN :
 
 ## Getting Started
 
-Just clone the repo on your computer. Be sure you can execute Ruby and Python script. 
-The Go script is compiled and should not require any specific environment. (Unless you mess around the src code)
+Just clone the repo on your computer. Be sure you can execute Ruby and Python scripts. 
+The Go script is compiled and should not require any specific environment. (Unless you mess around the src code and want to build it)
 
 ### How to use it
 
-By calling the Ruby script with the right parameters
+By calling the Ruby script with the right parameters.
 
 Here is the default call
 
@@ -33,10 +33,10 @@ python API.PY ../TEST_INPUT/TEST ../Result/testfile.txt
 
 Here is how the input should look like : 
 
-N - number of input expressions to solve 
-X1 - RPN expression to evaluate, separated by \n 
-X2 
-Xn 
+N - number of input expressions to solve
+X1 - RPN expression to evaluate, separated by \n
+X2
+Xn
 
 Example :
 
@@ -58,10 +58,6 @@ Example (for the previous Example given) :
 
 It took the program 0.00215888023376 to calculate the entries. 
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
