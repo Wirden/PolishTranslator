@@ -1,5 +1,8 @@
-PYNAME = '../API/API.PY'
-ARGS = '../TEST_INPUT/TEST ../Result/testfile.txt'
-python_output =  `python #{PYNAME} #{ARGS}`
+entryFile = ARGV[0]
+outputFile = ARGV[1]
 
-puts "Good God, it works ?"
+ PYNAME = '../API/API.PY'
+# ARGS = '../TEST_INPUT/TEST ../Result/tstfile.txt'
+python_output =  `python #{PYNAME} #{entryFile} #{outputFile}`
+
+puts python_output

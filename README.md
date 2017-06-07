@@ -19,10 +19,10 @@ The Go script is compiled and should not require any specific environment. (Unle
 
 By calling the Ruby script with the right parameters.
 
-Here is the default call
+Here is the default call when in the main folder
 
 ```
-python API.PY ../TEST_INPUT/TEST ../Result/testfile.txt
+ruby ./IO/IO.rb  ../TEST_INPUT/TEST ../Result/testfile.txt
 
 ```
 
